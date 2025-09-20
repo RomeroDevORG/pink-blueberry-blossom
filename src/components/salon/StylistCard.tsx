@@ -1,6 +1,8 @@
 import React from 'react';
 import { Star, Award } from 'lucide-react';
 import { Stylist } from '@/types/salon';
+import { useNavigate } from 'react-router-dom';
+import { useCalendly } from '@/hooks/use-calendly';
 
 interface StylistCardProps {
   stylist: Stylist;
@@ -9,6 +11,8 @@ interface StylistCardProps {
 }
 
 const StylistCard: React.FC<StylistCardProps> = ({ stylist, onSelect, isSelected }) => {
+  const naviate = useNavigate()
+  const {openCalendly} = useCalendly()  
   return (
     <div className={`salon-card group cursor-pointer transition-all ${
       isSelected ? 'ring-2 ring-primary-pink shadow-salon-card-hover' : ''
@@ -47,16 +51,16 @@ const StylistCard: React.FC<StylistCardProps> = ({ stylist, onSelect, isSelected
       </div>
       
       {!isSelected && (
-        <button className="btn-secondary w-full justify-center">
-          Select {stylist.name}
+        <button className="btn-secondary w-full justify-center" onClick={() => openCalendly(stylist.url)}>
+          Book Now
         </button>
       )}
-      
+{/*       
       {isSelected && (
         <div className="text-center text-primary-pink font-medium">
-          ✓ Selected
+          Book Now
         </div>
-      )}
+      )} */}
     </div>
   );
 };

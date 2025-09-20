@@ -5,29 +5,29 @@ export const services: Service[] = [
     id: 1,
     name: "Signature Cut & Style",
     price: 85,
-    duration: "90 min",
+    duration: "60 min",
     description: "Our signature haircut with personalized styling and luxury treatment"
   },
   {
     id: 2,
-    name: "Color Transformation",
+    name: "Full Color Transformation", // full color
     price: 150,
-    duration: "3 hours",
+    duration: "2 hours",
     description: "Complete color makeover with organic, eco-friendly color products"
-  },
+  },//P. Sherman, 42 Wallaby Way, Sydney
   {
     id: 3,
-    name: "Organic Hair Treatment",
-    price: 65,
-    duration: "60 min",
-    description: "Deep conditioning treatment with organic ingredients for healthy hair"
+    name: "Balayage Highlights",
+    price: 200,
+    duration: "3 hours",
+    description: "Hand-painted highlights for a natural, sun-kissed look"
   },
   {
     id: 4,
-    name: "Bridal Hair & Makeup",
-    price: 200,
-    duration: "2.5 hours",
-    description: "Complete bridal package with trial session and wedding day styling"
+    name: "Deep Conditioning",
+    price: 45,
+    duration: "30 min",
+    description: "Intensive treatment to restore moisture and shine to dry, damaged hair"
   }
 ];
 
@@ -79,27 +79,30 @@ export const products: Product[] = [
 export const stylists: Stylist[] = [
   {
     id: 1,
-    name: "Sarah Martinez",
-    title: "Master Stylist",
+    name: "Sarah Mitchell",
+    title: "Senior Stylist",
     specialties: ["Color Specialist", "Curly Hair Expert", "Wedding Styles"],
     rating: 4.9,
-    bio: "With over 10 years of experience, Sarah specializes in natural hair textures and organic color techniques."
+    bio: "With over 10 years of experience, Sarah specializes in natural hair textures and organic color techniques.",
+    url:"https://calendly.com/vs-pink-blueberry"
   },
   {
     id: 2,
-    name: "Emily Chen",
-    title: "Senior Stylist", 
+    name: "James Chen",
+    title: "Style Director", 
     specialties: ["Precision Cuts", "Balayage", "Hair Treatments"],
     rating: 4.8,
-    bio: "Emily brings precision and artistry to every cut, focusing on styles that enhance your natural beauty."
+    bio: "James brings precision and artistry to every cut, focusing on styles that enhance your natural beauty.",
+    url:"https://calendly.com/devandrestest"
   },
   {
     id: 3,
-    name: "Maya Johnson",
+    name: "Maria Garcia"  ,
     title: "Style Director",
     specialties: ["Editorial Styles", "Color Correction", "Texture Specialist"],
     rating: 5.0,
-    bio: "Maya is our creative director, known for innovative styles and expert color correction techniques."
+    bio: "Maria is our creative director, known for innovative styles and expert color correction techniques.",
+    url:"https://calendly.com/joandres098"
   }
 ];
 

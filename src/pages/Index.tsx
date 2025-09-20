@@ -9,15 +9,23 @@ import ShoppingCart from '@/components/cart/ShoppingCart';
 import BookingModal from '@/components/booking/BookingModal';
 import { services, products, stylists } from '@/data/salonData';
 import { Service } from '@/types/salon';
+import { useCalendly } from '@/hooks/use-calendly';
 
 const Index = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<Service | undefined>();
-
+  const { openCalendly } = useCalendly();
   const openBooking = (service?: Service) => {
     setSelectedService(service);
     setIsBookingOpen(true);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // (window as any)?.Calendly?.initPopupWidget({
+    //   url: 'https://calendly.com/vs-pink-blueberry'
+    // });
   };
+
+  
 
   return (
     <div className="min-h-screen bg-background">
@@ -119,7 +127,7 @@ const Index = () => {
                 >
                   <StylistCard 
                     stylist={stylist}
-                    onSelect={() => openBooking()}
+                    onSelect={() => openCalendly(stylist.url)}
                   />
                 </div>
               ))}

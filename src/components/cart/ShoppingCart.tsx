@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
-import { useCart } from '@/contexts/CartContext';
+import { useCart } from '@/hooks/useCartHook';
 
 const ShoppingCart: React.FC = () => {
   const { state, dispatch, totalItems, totalPrice } = useCart();

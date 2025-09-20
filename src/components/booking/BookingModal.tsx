@@ -4,6 +4,8 @@ import { Service, Stylist, BookingState } from '@/types/salon';
 import { services, stylists, timeSlots } from '@/data/salonData';
 import ServiceCard from '@/components/salon/ServiceCard';
 import StylistCard from '@/components/salon/StylistCard';
+import { useNavigate } from 'react-router-dom';
+import { useCalendly } from '@/hooks/use-calendly';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -16,7 +18,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
   const [booking, setBooking] = useState<BookingState>({
     service: initialService
   });
-
+  const router = useNavigate()
+  const { openCalendly } = useCalendly()
   if (!isOpen) return null;
 
   const steps = [
@@ -35,34 +38,68 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
+  
   const renderStepContent = () => {
+    
     switch (currentStep) {
       case 1:
         return (
           <div>
-            <h3 className="text-xl font-semibold mb-6">Choose Your Service</h3>
+            <h3 className="text-xl font-semibold mb-6">Select Your Stylist</h3>
             <div className="grid gap-4">
-              {services.map((service) => (
-                <div 
-                  key={service.id}
-                  className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                    booking.service?.id === service.id 
-                      ? 'border-primary-pink bg-light-pink/10' 
-                      : 'border-border hover:border-primary-pink/50'
-                  }`}
-                  onClick={() => setBooking({...booking, service})}
-                >
-                  <h4 className="font-semibold text-card-foreground">{service.name}</h4>
-                  <p className="text-muted-foreground text-sm mt-1">{service.description}</p>
-                  <div className="flex items-center justify-between mt-3">
-                    <span className="price-display">${service.price}</span>
-                    <span className="text-sm text-muted-foreground">{service.duration}</span>
-                  </div>
-                </div>
+              {stylists.map((stylist) => (
+                <StylistCard
+                  key={stylist.id}
+                  stylist={stylist}
+                  isSelected={booking.stylist?.id === stylist.id}
+                  onSelect={(stylist) =>{ 
+                    setBooking({...booking, stylist}); 
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  // (window as any)?.Calendly?.initPopupWidget({
+                  //     url: stylist.url
+                  //   });
+                    openCalendly(stylist.url)
+                    onClose?.()
+                }}
+                />
               ))}
+              <div 
+                className={`salon-card cursor-pointer ${
+                  booking.stylist?.id === 0 ? 'ring-2 ring-primary-pink' : ''
+                }`}
+                onClick={() => setBooking({...booking, stylist: { id: 0, name: 'No Preference', title: '', specialties: [], rating: 0, bio: '', url:"" }})}
+              >
+                <h4 className="font-semibold text-card-foreground">No Preference</h4>
+                <p className="text-muted-foreground text-sm">Any available stylist</p>
+              </div>
             </div>
           </div>
-        );
+        )
+        // return (
+        //   <div>
+        //     <h3 className="text-xl font-semibold mb-6">Choose Your Service</h3>
+        //     <div className="grid gap-4">
+        //       {services.map((service) => (
+        //         <div 
+        //           key={service.id}
+        //           className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
+        //             booking.service?.id === service.id 
+        //               ? 'border-primary-pink bg-light-pink/10' 
+        //               : 'border-border hover:border-primary-pink/50'
+        //           }`}
+        //           onClick={() => setBooking({...booking, service})}
+        //         >
+        //           <h4 className="font-semibold text-card-foreground">{service.name}</h4>
+        //           <p className="text-muted-foreground text-sm mt-1">{service.description}</p>
+        //           <div className="flex items-center justify-between mt-3">
+        //             <span className="price-display">${service.price}</span>
+        //             <span className="text-sm text-muted-foreground">{service.duration}</span>
+        //           </div>
+        //         </div>
+        //       ))}
+        //     </div>
+        //   </div>
+        // );
 
       case 2:
         return (
@@ -81,7 +118,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
                 className={`salon-card cursor-pointer ${
                   booking.stylist?.id === 0 ? 'ring-2 ring-primary-pink' : ''
                 }`}
-                onClick={() => setBooking({...booking, stylist: { id: 0, name: 'No Preference', title: '', specialties: [], rating: 0, bio: '' }})}
+                onClick={() => setBooking({...booking, stylist: { id: 0, name: 'No Preference', title: '', specialties: [], rating: 0, bio: '', url:"" }})}
               >
                 <h4 className="font-semibold text-card-foreground">No Preference</h4>
                 <p className="text-muted-foreground text-sm">Any available stylist</p>

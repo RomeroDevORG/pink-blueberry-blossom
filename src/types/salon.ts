@@ -23,6 +23,7 @@ export interface Stylist {
   rating: number;
   bio: string;
   image?: string;
+  url: string;
 }
 
 export interface CartItem {

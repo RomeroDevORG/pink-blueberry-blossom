@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShoppingBag, Calendar, Sparkles } from 'lucide-react';
-import { useCart } from '@/contexts/CartContext';
+import { useCart } from '@/hooks/useCartHook';
 
 interface HeaderProps {
   onBookingClick?: () => void;
@@ -16,7 +16,8 @@ const Header: React.FC<HeaderProps> = ({ onBookingClick }) => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-pink to-primary-blue flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-white" />
+              {/* <Sparkles className="w-6 h-6 text-white" /> */}
+              <img src="/logo.png" alt="The Pink Blueberry Logo" className="w-full h-full object-cover rounded-full" />
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-primary-pink to-primary-blue bg-clip-text text-transparent">

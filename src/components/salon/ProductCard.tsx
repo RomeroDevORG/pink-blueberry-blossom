@@ -1,7 +1,7 @@
 import React from 'react';
-import { Plus, ShoppingCart } from 'lucide-react';
+import { Plus, ShoppingBag } from 'lucide-react';
 import { Product } from '@/types/salon';
-import { useCart } from '@/contexts/CartContext';
+import { useCart } from '@/hooks/useCartHook';
 
 interface ProductCardProps {
   product: Product;
@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="salon-card group">
       <div className="aspect-square bg-gradient-to-br from-light-pink/20 to-light-blue/20 rounded-xl mb-4 flex items-center justify-center">
-        <ShoppingCart className="w-12 h-12 text-primary-pink/60" />
+        <ShoppingBag className="w-12 h-12 text-primary-pink/60" />
       </div>
       
       <div className="mb-4">
